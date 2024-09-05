@@ -1,0 +1,51 @@
+.Forecasts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: calc(100% - 73px);
+}
+.ForecastsData {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px) saturate(120%);
+  -webkit-backdrop-filter: blur(4px) saturate(120%);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  max-width: 250vw;
+  height: 250px;
+  max-height: 30vh;
+  margin: 20px auto;
+}
+
+.WeatherIcon {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .Forecasts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ForecastsData {
+    width: 200px;
+    height: 200px;
+    max-width: 40vw;
+    max-height: 25vh;
+    margin: 10px auto;
+  }
+  .WeatherIcon {
+    width: 80px;
+    height: 80px;
+    margin: 0px;
+  }
+  .Data {
+    text-transform: capitalize;
+    line-height: 1.3 !important;
+    font-size: 0.8rem !important;
+  }
+}

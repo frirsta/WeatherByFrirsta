@@ -36,13 +36,13 @@ const Search = ({
               variant="standard"
               type="text"
               placeholder="Enter city name"
-              sx={{ width: "100%" }}
+              sx={{ width: "100%", "& .MuiInput-root": { color: "#fff1e6" } }}
               InputProps={{
                 ...params.InputProps,
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={onHandleIconClick}>
-                      <SearchOutlinedIcon />
+                      <SearchOutlinedIcon sx={{ color: "#fff1e6" }} />
                     </IconButton>
                   </InputAdornment>
                 ),

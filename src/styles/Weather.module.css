@@ -41,6 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: calc(100% - 73px);
 }
 
 .Container {
@@ -74,6 +75,20 @@
   padding: 20px;
 }
 
+.CityForecasts {
+  display: flex;
+  height: calc(100% - 73px);
+  width: 70%;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+.Alert {
+  position: absolute;
+  top: 5vh;
+  z-index: 1;
+  width: 100%;
+}
 @media screen and (max-width: 768px) {
   .AppContent {
     height: calc(100% - 73px);
@@ -96,5 +111,8 @@
   }
   .SearchContainer {
     padding: 20px;
+  }
+  .Alert {
+    top: 10vh;
   }
 }
