@@ -1,0 +1,100 @@
+.dayGradientBackground {
+  background: linear-gradient(300deg, #cee6ff, #3281c6, #74aede, #cee6ff);
+  background-size: 240% 240%;
+  animation: day-gradient-animation 24s ease infinite;
+}
+
+.nightGradientBackground {
+  background: linear-gradient(300deg, #0a2076, #032663, #060621, #04044a);
+  background-size: 240% 240%;
+  animation: night-gradient-animation 24s ease infinite;
+}
+
+@keyframes day-gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes night-gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+.AppContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 70%;
+}
+.WeeklyForecastContainer {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 50%;
+  height: 100%;
+  margin: 0 20px;
+}
+.WeeklyContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 30%;
+}
+
+.SearchContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .AppContent {
+    height: calc(100% - 73px);
+  }
+  .Container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .WeeklyForecastContainer {
+    width: 100%;
+    height: 30%;
+    margin: 10px auto;
+    align-items: center;
+  }
+  .WeeklyContainer {
+    width: 95%;
+  }
+  .SearchContainer {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,41 @@
+.TodayWeather {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.WeatherIcon {
+  display: flex;
+  align-items: center;
+}
+
+.WeatherIconImage {
+  width: 90px;
+  opacity: 0.8;
+}
+
+.Details {
+  display: flex;
+  justify-content: space-between;
+}
+.DetailsText {
+  font-size: 11px !important;
+}
+@media screen and (max-width: 768px) {
+  .TodayWeather {
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .Temp {
+    font-size: 50px !important;
+  }
+  .Date {
+    font-size: 15px !important;
+  }
+  .WeatherIconImage {
+    width: 50px;
+  }
+}

@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-import Grid from "@mui/material/Grid2";
+import { v4 as uuidv4 } from "uuid";
+import styles from "../styles/Weather.module.css";
+import DailyForecast from "./DailyForecast";
+import TodayWeather from "./TodayWeather";
+import Details from "./Details";
+import Search from "./Search";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import Autocomplete from "@mui/material/Autocomplete";
 
 const Weather = () => {
+  const mediaQuery = useMediaQuery("(max-width: 768px)");
   const [city, setCity] = useState({ name: "" });
   const [options, setOptions] = useState([]);
   const [weather, setWeather] = useState(null);
@@ -18,12 +21,16 @@ const Weather = () => {
   const [error, setError] = useState("");
 
   const fetchWeatherData = async () => {
+    if (!city.name?.trim()) {
+      setError("Please enter a city name");
+      return;
+    }
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
       );
       const forecastResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city.name}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
       );
       setWeather(response.data);
       setForecast(filterFiveDayForecast(forecastResponse.data.list));
@@ -36,6 +43,7 @@ const Weather = () => {
       console.log(e);
     }
   };
+
   const filterFiveDayForecast = (list) => {
     const dailyForecast = new Map();
     list.forEach((item) => {
@@ -78,22 +86,31 @@ const Weather = () => {
       console.log("Failed to fetch city suggestions:", e);
     }
   };
-  const handleChange = (e) => {
-    setCity(e.target.value);
+  const handleChange = (event, newValue) => {
+    if (typeof newValue === "string") {
+      setCity({ name: newValue });
+    } else if (newValue && newValue.name) {
+      setCity(newValue);
+    } else {
+      setCity({ name: "" });
+    }
   };
-  const handleInputChange = (e) => {
-    if (e.target.value.length > 3) {
-      fetchCitySuggestions(e.target.value);
+
+  const handleInputChange = (e, newInputValue) => {
+    setCity({ name: newInputValue });
+    if (newInputValue.length > 2) {
+      fetchCitySuggestions(newInputValue);
     }
   };
 
   const handleIconClick = () => {
-    if (city.name?.trim() === "") {
+    if (!city.name?.trim()) {
       setError("Please enter a city name");
       return;
     }
     fetchWeatherData();
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleIconClick();
@@ -101,111 +118,73 @@ const Weather = () => {
 
   return (
     <Box
-      style={{
-        backgroundColor: isDay ? "#74aede" : "#342564",
-        padding: "20px",
-      }}
+      className={`${styles.App} ${
+        isDay ? styles.dayGradientBackground : styles.nightGradientBackground
+      }`}
     >
-      <form onSubmit={handleSubmit}>
-        <Autocomplete
-          freeSolo
-          onChange={handleChange}
-          onInputChange={handleInputChange}
-          getOptionLabel={(option) => {
-            if (typeof option === "object" && option.label) {
-              return option.label;
-            }
-
-            if (typeof option === "string") {
-              return option;
-            }
-            return "";
-          }}
+      <Box className={styles.SearchContainer}>
+        <Search
+          onHandleSubmit={handleSubmit}
+          onHandleChange={handleChange}
+          onHandleInputChange={handleInputChange}
           options={options}
-          renderOption={(props, option) => (
-            <li {...props} key={option.id}>
-              {option.label}
-            </li>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              size="small"
-              variant="outlined"
-              type="text"
-              placeholder="Enter city name"
-              slotProps={{
-                inputProps: { "aria-label": "search", value: city.name },
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <IconButton></IconButton> <SearchOutlinedIcon />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton>
-                      <SearchOutlinedIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              sx={{
-                width: "100%",
-                "& .MuiInputBase-root": {
-                  borderRadius: "30px",
-                  padding: "5px 20px",
-                },
-                backgroundColor: "#ddeff5",
-                borderRadius: "30px",
-                "& .MuiOutlinedInput-root": {
-                  "&.Mui-focused fieldset": {
-                    borderWidth: "1px",
-                    borderColor: "#90E0EF",
-                  },
-                },
-              }}
-            />
-          )}
+          onHandleIconClick={handleIconClick}
         />
-      </form>
-      {error && <p>{error}</p>}
-      {weather && (
-        <Box>
-          <img
-            src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-            alt={weather.weather[0].description}
-          />
-          <h1>{weather.name}</h1>
-          <h2>{weather.weather[0].description}</h2>
-          <h2>{weather.main.temp}°C</h2>
-          <p>Humidity: {weather.main.humidity}</p>
-          <p>Wind speed: {weather.wind.speed} m/s</p>
+      </Box>
+
+      <Box className={styles.AppContent}>
+        <Box sx={{ position: "absolute", top: "5vh" }}>
+          {error && (
+            <Alert variant="filled" severity="warning">
+              <Typography>{error}</Typography>
+            </Alert>
+          )}
         </Box>
-      )}
-      {forecast?.map((item) => (
-        <Grid
-          size={3}
-          sx={{
-            padding: "10px",
-            border: "1px solid #ffffff",
-            borderRadius: "10px",
-            backdropFilter: "blur(5px)",
-            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-            background: "rgba(255, 255, 255, 0.50)",
-          }}
-          sm={{ padding: "100px" }}
-          key={`${item.dt}`}
-        >
-          <img
-            src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
-            alt={item.weather[0].description}
+
+        <Box className={styles.Container}>
+          <Box className={styles.WeeklyForecastContainer}>
+            {weather && (
+              <TodayWeather
+                name={weather.name}
+                country={weather.sys.country}
+                temp={weather.main.temp}
+                humidity={weather.main.humidity}
+                speed={weather.wind.speed}
+                weatherIcon={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                description={weather.weather[0].description}
+                weatherDate={weather.dt}
+                feelsLike={weather.main.feels_like}
+              />
+            )}
+            {!mediaQuery && (
+              <Box className={styles.WeeklyContainer}>
+                {forecast?.map((item) => (
+                  <DailyForecast
+                    key={item.dt}
+                    weatherIcon={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
+                    description={item.weather[0].description}
+                    temp={item.main.temp}
+                    humidity={item.main.humidity}
+                    speed={item.wind.speed}
+                    weatherDate={item.dt_txt}
+                  />
+                ))}
+              </Box>
+            )}
+          </Box>
+          <Details
+            dailyForecast={forecast}
+            humidity={weather?.main.humidity}
+            windSpeed={weather?.wind.speed}
+            sunrise={weather?.sys.sunrise}
+            sunset={weather?.sys.sunset}
+            clouds={weather?.clouds.all}
+            highTemp={weather?.main.temp_max}
+            lowTemp={weather?.main.temp_min}
+            options={options}
           />
-          <h3>{item.weather[0].description}</h3>
-          <h3>{item.main.temp} °C</h3>
-          <p>Humidity: {item.main.humidity}</p>
-          <p>Wind speed: {item.wind.speed} m/s</p>
-        </Grid>
-      ))}
+        </Box>
+      </Box>
     </Box>
   );
 };

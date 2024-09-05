@@ -1,14 +1,8 @@
 import Weather from "./components/Weather";
+import "./styles/App.css";
 
-const api = {
-  key: process.env.REACT_APP_API_KEY,
-};
 function App() {
-  return (
-    <div>
-      <Weather />
-    </div>
-  );
+  return <Weather />;
 }
 
 export default App;

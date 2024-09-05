@@ -1,0 +1,30 @@
+.DailyForecast {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px) saturate(120%);
+  -webkit-backdrop-filter: blur(4px) saturate(120%);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 110px;
+}
+
+@media screen and (max-width: 768px) {
+  .DailyForecast {
+    width: 80px;
+    height: 80px;
+    margin: 1px;
+  }
+  .DailyText {
+    font-size: 11px !important;
+    line-height: 0 !important;
+  }
+  .WeatherIcon {
+    width: 40px;
+    height: 40px;
+  }
+}
