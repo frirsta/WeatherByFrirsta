@@ -212,6 +212,8 @@ const Weather = () => {
                 highTemp={weather?.main.temp_max}
                 lowTemp={weather?.main.temp_min}
                 options={options}
+                city={weather?.name}
+                country={weather?.sys.country}
               />
             </Box>
           </Box>

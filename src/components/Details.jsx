@@ -19,6 +19,8 @@ const convertUnixToTime = (unixTimestamp) => {
 };
 
 const Details = ({
+  city,
+  country,
   dailyForecast,
   humidity,
   windSpeed,
@@ -33,6 +35,10 @@ const Details = ({
   sunset = convertUnixToTime(sunset);
   return (
     <Box className={styles.Details}>
+      <Typography fontWeight={100} variant="h4" sx={{ textAlign: "center" }}>
+        {city} {country}
+      </Typography>
+
       <Box className={styles.SunContainer}>
         <Box
           className={styles.sunRiseSet}

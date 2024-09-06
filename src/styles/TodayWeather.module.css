@@ -1,5 +1,5 @@
 .TodayWeather {
-  height: 50%;
+  padding: 10px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -26,8 +26,11 @@
 @media screen and (max-width: 768px) {
   .TodayWeather {
     height: 100%;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
+    padding: 10px 30px;
+    max-width: 450px;
+    margin: auto;
   }
   .Temp {
     font-size: 50px !important;
@@ -37,5 +40,13 @@
   }
   .WeatherIconImage {
     width: 50px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .TodayWeather {
+  }
+  .Details {
+    flex-direction: column;
   }
 }

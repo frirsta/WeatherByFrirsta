@@ -11,6 +11,7 @@
   align-items: center;
   width: 70px;
   height: 110px;
+  margin: 1px;
 }
 
 @media screen and (max-width: 768px) {

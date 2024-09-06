@@ -24,7 +24,6 @@
 .WeatherIcon {
   width: 100px;
   height: 100px;
-  margin: 10px;
 }
 
 @media screen and (max-width: 768px) {
