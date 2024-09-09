@@ -45,10 +45,15 @@ The app will be available at http://localhost:3000.
 ## Key Components:
 
 **Weather.jsx**: Main logic component responsible for handling API requests and rendering weather data.
+<br />
 **Search.jsx**: Handles the search functionality, allowing users to search for a city's weather.
+<br />
 **TodayWeather.jsx**: Displays the current weather for a selected city.
+<br />
 **DailyForecast.jsx**: Renders individual daily forecasts within the 5-day forecast.
+<br />
 **Forecasts.jsx**: Displays weather data for predefined cities like London, Tokyo, and New York.
+<br />
 **Details.jsx**: Displays detailed weather information such as sunrise/sunset times, wind speed, and humidity.
 
 ## CSS Modules
@@ -56,14 +61,24 @@ The app will be available at http://localhost:3000.
 Custom styling is applied through CSS modules. Some key style modules are:
 
 **Weather.module.css**: Controls the overall app layout, including the dynamic day/night backgrounds.
+<br />
+
 **TodayWeather.module.css**: Handles layout and styling of the current weather display.
+<br />
+
 **DailyForecast.module.css**: Styles the individual daily weather forecast cards.
+<br />
+
 **Details.module.css**: Styles for the detailed weather data display.
+<br />
+
 **Forecasts.module.css**: Controls the grid layout and styling of predefined city forecasts.
 
 ### App and Global Styling
 
 **App.js**: Main entry point that renders the Weather component.
+<br />
+
 **App.css**: Contains global styles, including font settings and body styling.
 
 ## Sources
