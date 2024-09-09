@@ -3,6 +3,8 @@
 This is a simple Weather App built using **React** and the **OpenWeather API**. The app allows users to search for weather forecasts in any city, displaying current weather conditions and a 5-day forecast. It also features a list of preselected cities with their forecast displayed in a grid format.
 
 **Live link:** [WeatherByFrirsta](https://weatherbyfrirsta.netlify.app)
+<br />
+[![Netlify Status](https://api.netlify.com/api/v1/badges/16aa1625-a129-436e-8000-63c1513037f2/deploy-status)](https://app.netlify.com/sites/weatherbyfrirsta/deploys)
 
 ## Features
 
