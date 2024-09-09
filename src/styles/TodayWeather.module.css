@@ -23,7 +23,14 @@
 .DetailsText {
   font-size: 11px !important;
 }
+
 @media screen and (max-width: 768px) {
+  .WeatherIconContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+  }
   .TodayWeather {
     height: 100%;
     align-items: flex-start;

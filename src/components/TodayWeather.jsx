@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/TodayWeather.module.css";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useMediaQuery } from "@mui/material";
+
 function formatDate(dateString) {
   const date = new Date(dateString);
 
@@ -42,10 +42,9 @@ const TodayWeather = ({
   weatherDate,
   feelsLike,
 }) => {
-  const mediaQuery = useMediaQuery("(max-width: 600px)");
   return (
     <Box className={styles.TodayWeather}>
-      {!mediaQuery && (
+      <Box className={styles.WeatherIconContainer}>
         <Box className={styles.WeatherIcon}>
           <img
             className={styles.WeatherIconImage}
@@ -53,11 +52,10 @@ const TodayWeather = ({
             alt={description}
           />
         </Box>
-      )}
-
-      <Typography className={styles.Temp} variant="h2" fontWeight={100}>
-        {temp}°C
-      </Typography>
+        <Typography className={styles.Temp} variant="h2" fontWeight={100}>
+          {temp}°C
+        </Typography>
+      </Box>
 
       <Typography className={styles.Date} variant="h6" fontWeight={100}>
         {formatDate(weatherDate * 1000)}
