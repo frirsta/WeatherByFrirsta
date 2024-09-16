@@ -8,7 +8,7 @@ const Forecasts = ({ data }) => {
     <Box className={styles.Forecasts}>
       {data.map((cityData) => (
         <Box className={styles.ForecastsData} key={cityData.id}>
-          <Typography className={styles.Title} variant="h5" fontWeight={200}>
+          <Typography className={styles.Title} fontWeight={200}>
             {cityData.name}
           </Typography>
           <img

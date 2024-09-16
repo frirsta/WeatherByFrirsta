@@ -17,7 +17,6 @@
   width: 250px;
   max-width: 250vw;
   height: 250px;
-  max-height: 30vh;
   margin: 20px auto;
 }
 
@@ -33,8 +32,8 @@
   .ForecastsData {
     width: 200px;
     height: 200px;
-    max-width: 40vw;
-    max-height: 25vh;
+    max-width: 45vw;
+
     margin: 10px auto;
   }
   .WeatherIcon {
